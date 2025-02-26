@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dicsérő & Vicces CsajOldal 💖</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #ffccff, #ff99cc, #cc99ff);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Háttér háromszögek */
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: 15px 15px;
+            background-image: repeating-linear-gradient(45deg, rgba(255, 105, 180, 0.3) 0px, rgba(255, 182, 193, 0.3) 15px);
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* Menü */
+        .menu {
+            background: #ff1493;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .menu li {
+            margin: 0 15px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .menu li:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Hamburger Menü */
+        .hamburger {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease;
+            position: absolute;
+            right: 40px;
+        }
+
+        .rotated {
+            transform: rotate(237deg);
+        }
+
+        @media (max-width: 768px) {
+            .menu ul {
+                display: none;
+                flex-direction: column;
+                background: #ff69b4;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                top: 50px;
+            }
+
+            .menu ul.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        /* Tartalom */
+        .content {
+            padding: 100px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Szívecskék random megjelenése és eltűnése - Fix konténerben */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .heart {
+            position: absolute;
+            color: red;
+            opacity: 0;
+            animation: fadeInOut 3s linear infinite;
+        }
+
+        /* Rólam rész */
+        .rolam-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .rolam-text {
+            max-width: 50%;
+            text-align: justify;
+        }
+
+        .rolam-img img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            border: 3px solid #ff69b4;
+        }
+
+        /* Statisztika és csajfaktor egymás mellett */
+        .stat-csaj-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .stat-box, .csaj-box {
+            width: 35%;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+.nev-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+
+.nev-box {
+    width: 80%;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    opacity: 0.8;
+    text-align: left;
+    box-shadow: none;
+}
+
+h2 {
+    font-size: 26px;
+    color: #ff1493;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 18px;
+    color: #333;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="background-pattern"></div>
+    <div class="hearts-container"></div>
+
+    <nav class="menu">
+        <span class="logo">K.M.D</span>
+        <span class="hamburger" onclick="toggleMenu()">☰</span>
+        <ul>
+            <li><a href="#rolam">Rólam</a></li>
+            <li><a href="#adatok">Csajfaktor</a></li>
+            <li><a href="#statisztikak">Statisztikák</a></li>
+            <li><a href="#nevjelentes">Név Jelentése</a></li>
+        </ul>
+    </nav>
+
+    <section id="rolam" class="content">
+        <h1>Rólam</h1>
+        <div class="rolam-container">
+            <div class="rolam-text">
+                <p>A szomszédom mellett lakok, pipiskedve 164centis vagyok. Nem szeretek csücsöríteni a fényképeken. Szabadidőmben szivesen nézek Jakkarit 😍</p>
+            </div>
+            <div class="rolam-img">
+                <img src="https://img.lovepik.com/png/20231119/cartoon-image-of-a-blonde-girl-with-long-hair-clipart_637958_wh1200.png" alt="Pixeles csajos kép">
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="stat-csaj-container">      
+        <div id="adatok" class="csaj-box">
+            <h1>Csajfaktor</h1>
+            <p>Arc: ⭐⭐⭐⭐⭐</p>
+            <p>Test: ⭐⭐⭐⭐⭐</p>
+            <p>Cickó: ⭐⭐⭐⭐⭐</p>
+            <p>Popó: ⭐⭐⭐⭐⭐</p>
+            <p>Haj: ⭐⭐⭐⭐⭐</p>
+        </div>
+
+        <div id="statisztikak" class="stat-box">
+            <h1>Statisztikák</h1>
+            <canvas id="chart"></canvas>
+            <p>Tökéletes külső belső-arány</p>
+        </div>
+    </section>
+<section id="nevjelentes" class="content">
+    <h1>Név Jelentése</h1>
+    <div class="nev-container">
+        <div class="nev-box">
+            <h2>Melani</h2>
+            <p><strong>Jelentése:</strong> "A legfényesebb csillag az égen"  <br>
+               <strong>Előny:</strong> Igazi egyéniség! Feltűnően csinos test, formás popsi, bomba cickok, nagy sziv és szerénység jellemzi.
+             <br>   <strong>Hátrány:</strong> Sok irígy, tökéletes külső és belső hatására.</p>
+        </div>
+
+        <div class="nev-box">
+            <h2>Dorina</h2>
+            <p><strong>Jelentése:</strong> "Isten ajándéka" <br>
+              <strong>Előny:</strong> Ő egy igazi ajándék, amit mindenki meg akar kapni.                  
+               Ha egyszer megölelsz egy Dorinát, akkor tuti, hogy örökre elfelejted, hogy mi is az a szomorúság! 💖
+                <strong>Hátrány:</strong> Túl nagy népszerűség! </p>
+        </div>
+    </div>
+</section>
+
+
+
+    <script>
+        function toggleMenu() {
+            let menu = document.querySelector(".menu ul");
+            let burger = document.querySelector(".hamburger");
+            menu.classList.toggle("active");
+            burger.classList.toggle("rotated");
+        }
+
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = Math.random() * 100 + "vh";
+            heart.style.fontSize = Math.random() * 20 + 10 + "px";
+            document.querySelector(".hearts-container").appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        setInterval(createHeart, 500);
+
+        new Chart(document.getElementById("chart"), {
+            type: "pie",
+            data: {
+                labels: ["Külső", "Belső"],
+                datasets: [{
+                    data: [50, 50],
+                    backgroundColor: ["#ff69b4", "#db7093"]
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>
